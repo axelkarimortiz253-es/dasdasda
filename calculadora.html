@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mi primera aplicación Vue</title>
+
+    <!-- Importar Vue 3 -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            margin: 0;
+            display: grid;
+            place-items: center;
+            padding: 24px;
+            background: #f1f5f9;
+            color: #172033;
+            font-family: Arial, sans-serif;
+        }
+
+        .calculator {
+            width: min(100%, 420px);
+            padding: 28px;
+            border-radius: 16px;
+            background: #ffffff;
+            box-shadow: 0 12px 32px rgb(15 23 42 / 12%);
+        }
+
+        h1 {
+            margin: 0 0 24px;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin: 16px 0 6px;
+            font-weight: 600;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font: inherit;
+        }
+
+        .operations {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 12px;
+            border: 0;
+            border-radius: 8px;
+            background: #2563eb;
+            color: white;
+            cursor: pointer;
+            font: inherit;
+            font-weight: 700;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        button.clear {
+            grid-column: 1 / -1;
+            background: #475569;
+        }
+
+        .result {
+            min-height: 28px;
+            margin: 22px 0 0;
+            overflow-wrap: anywhere;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .error {
+            color: #b91c1c;
+        }
+    </style>
+</head>
+
+<body>
+<main id="app" class="calculator">
+        <h1>Calculadora</h1>
+
+        <label for="first-number">Primer número</label>
+        <input id="first-number" v-model.number="firstNumber" type="number" step="any">
+
+        <label for="second-number">Segundo número</label>
+        <input id="second-number" v-model.number="secondNumber" type="number" step="any">
+
+        <div class="operations" aria-label="Operaciones">
+            <button type="button" @click="calculate('add')">+</button>
+            <button type="button" @click="calculate('subtract')">−</button>
+            <button type="button" @click="calculate('multiply')">×</button>
+            <button type="button" @click="calculate('divide')">÷</button>
+            <button type="button" @click="calculate('sqrt')">√</button>
+            <button type="button" @click="calculate('power')">xʸ</button>
+            <button type="button" class="clear" @click="clear">Limpiar</button>
+        </div>
+
+        <p class="result" aria-live="polite">
+            <span v-if="error" class="error">{{ error }}</span>
+            <span v-else-if="result !== null">Resultado: {{ result }}</span>
+        </p>
+    </main>
+
+    <!-- Inicializar Vue y montar la calculadora -->
+    <script src="calculadoramain.js"></script>
+</body>
+</html>
